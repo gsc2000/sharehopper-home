@@ -1,11 +1,12 @@
 :root {
-    --bg-color: #0d1117;
-    --text-color: #c9d1d9;
-    --primary-color: #58a6ff;
-    --secondary-color: #79c0ff;
-    --accent-color: #8a2be2;
-    --card-bg: rgba(22, 27, 34, 0.7);
-    --nav-bg: rgba(13, 17, 23, 0.8);
+    --bg-color: #f0f8ff; /* AliceBlue */
+    --text-color: #333333;
+    --primary-color: #00bfff; /* DeepSkyBlue */
+    --secondary-color: #87cefa; /* LightSkyBlue */
+    --accent-color: #007bff;
+    --card-bg: #ffffff;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+    --shadow-color: rgba(0, 191, 255, 0.15);
 }
 
 * {
@@ -15,7 +16,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -40,7 +41,8 @@ body {
     background: var(--nav-bg);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .logo {
@@ -49,7 +51,7 @@ body {
     gap: 10px;
     font-size: 1.5rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--primary-color);
 }
 
 .logo img {
@@ -76,13 +78,14 @@ nav a:hover {
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     text-align: center;
     overflow: hidden;
+    padding-top: 80px;
 }
 
 .hero-content {
@@ -92,7 +95,7 @@ nav a:hover {
 
 .hero h1 {
     font-size: 4rem;
-    color: #fff;
+    color: var(--accent-color);
     margin-bottom: 1rem;
     background: -webkit-linear-gradient(45deg, var(--primary-color), var(--accent-color));
     -webkit-background-clip: text;
@@ -102,22 +105,25 @@ nav a:hover {
 .hero p {
     font-size: 1.5rem;
     margin-bottom: 2rem;
+    color: #555;
 }
 
 .btn {
     display: inline-block;
-    padding: 0.8rem 2rem;
+    padding: 1rem 2.5rem;
     background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
     color: #fff;
     text-decoration: none;
-    border-radius: 30px;
-    font-weight: 600;
+    border-radius: 40px;
+    font-weight: 700;
+    font-size: 1.1rem;
     transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 15px var(--shadow-color);
 }
 
 .btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(88, 166, 255, 0.3);
+    box-shadow: 0 10px 25px rgba(0, 123, 255, 0.4);
 }
 
 /* Background Gradients */
@@ -134,14 +140,14 @@ nav a:hover {
     position: absolute;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(88, 166, 255, 0.15) 0%, rgba(13, 17, 23, 0) 70%);
+    background: radial-gradient(circle, rgba(135, 206, 250, 0.4) 0%, rgba(240, 248, 255, 0) 70%);
     top: -100px;
     left: -100px;
     border-radius: 50%;
 }
 
 .gradient-sphere.secondary {
-    background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, rgba(13, 17, 23, 0) 70%);
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.3) 0%, rgba(240, 248, 255, 0) 70%);
     bottom: -200px;
     right: -100px;
     top: auto;
@@ -152,13 +158,18 @@ nav a:hover {
 .section {
     padding: 6rem 0;
     position: relative;
+    background: #fff;
+}
+
+.section:nth-child(even) {
+    background: var(--bg-color);
 }
 
 .section-title {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
-    color: #fff;
+    color: var(--accent-color);
 }
 
 /* About Section */
@@ -188,34 +199,108 @@ nav a:hover {
 
 .feature-card {
     background: var(--card-bg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    padding: 2rem;
+    border: 1px solid rgba(0, 191, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
     text-align: center;
-    transition: transform 0.3s, border-color 0.3s;
-    backdrop-filter: blur(10px);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 .feature-card:hover {
     transform: translateY(-10px);
-    border-color: var(--primary-color);
+    box-shadow: 0 15px 40px var(--shadow-color);
 }
 
 .feature-card .icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
 }
 
 .feature-card h3 {
-    color: #fff;
+    color: var(--accent-color);
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
 
+/* App Screenshots Section */
+.app-showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+    margin-top: 4rem;
+}
+
+.showcase-row {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.showcase-row:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.showcase-text {
+    flex: 1;
+}
+
+.showcase-text h3 {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.showcase-text p {
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.showcase-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* Smartphone & Tablet CSS Frames */
+.device-frame {
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    border-radius: 24px;
+    padding: 10px;
+    border: 4px solid #e1e8ed;
+}
+
+.device-frame.tablet {
+    width: 100%;
+    max-width: 600px;
+    border-radius: 16px;
+}
+
+.device-frame.phone {
+    width: 280px;
+    height: 580px;
+    border-radius: 36px;
+    padding: 12px;
+}
+
+.device-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.device-frame.phone img {
+    border-radius: 24px;
+}
+
 /* Footer */
 footer {
-    background: var(--nav-bg);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: #fff;
+    border-top: 1px solid rgba(0, 191, 255, 0.1);
     padding: 3rem 0;
     text-align: center;
 }
@@ -231,17 +316,17 @@ footer {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    color: #fff;
+    color: var(--primary-color);
 }
 
 .footer-logo img {
-    height: 30px;
+    height: 40px;
 }
 
 .social-links a {
-    color: var(--text-color);
+    color: var(--accent-color);
     text-decoration: none;
     margin: 0 10px;
     font-weight: 600;
@@ -281,6 +366,14 @@ footer {
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+    .showcase-row, .showcase-row:nth-child(even) {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+}
+
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.5rem; }
     .hero p { font-size: 1.2rem; }
