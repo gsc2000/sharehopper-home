@@ -49,9 +49,10 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 1.5rem;
+    font-size: clamp(1.1rem, 4vw, 1.5rem);
     font-weight: 700;
     color: var(--primary-color);
+    white-space: nowrap;
 }
 
 .logo img {
@@ -481,9 +482,10 @@ footer {
 
 @media (max-width: 768px) {
     .hero h1 { 
-        font-size: clamp(1rem, 4.5vw, 2rem);
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
         white-space: normal;
         word-break: keep-all;
+        line-height: 1.4;
     }
     .hero p { font-size: 1.1rem; }
     nav ul li:not(:last-child) { display: none; }
