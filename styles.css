@@ -471,6 +471,11 @@ footer {
     vertical-align: middle;
 }
 
+/* Utilities */
+.sp-only {
+    display: none;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .showcase-row, .showcase-row:nth-child(even) {
@@ -489,4 +494,5 @@ footer {
     }
     .hero p { font-size: 1.1rem; }
     nav ul li:not(:last-child) { display: none; }
+    .sp-only { display: initial; }
 }
