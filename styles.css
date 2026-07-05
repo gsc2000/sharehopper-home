@@ -63,6 +63,7 @@ nav ul {
     list-style: none;
     display: flex;
     gap: 2rem;
+    align-items: center;
 }
 
 nav a {
@@ -455,6 +456,20 @@ footer {
     font-weight: 600;
 }
 
+/* App Store Badge */
+.app-store-badge {
+    display: inline-block;
+    transition: opacity 0.3s;
+}
+.app-store-badge:hover {
+    opacity: 0.8;
+}
+.app-store-badge img {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
     .showcase-row, .showcase-row:nth-child(even) {
@@ -471,5 +486,5 @@ footer {
         word-break: keep-all;
     }
     .hero p { font-size: 1.1rem; }
-    nav ul { display: none; }
+    nav ul li:not(:last-child) { display: none; }
 }
