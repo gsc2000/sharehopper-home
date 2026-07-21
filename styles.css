@@ -78,6 +78,39 @@ nav a:hover {
     color: var(--primary-color);
 }
 
+.advisor-page-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.8rem;
+    border: 1px solid rgba(0, 123, 255, 0.35);
+    border-radius: 999px;
+    color: var(--accent-color);
+    background: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.advisor-page-link:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--shadow-color);
+}
+
+.advisor-page-link:focus-visible {
+    outline: 3px solid rgba(0, 191, 255, 0.35);
+    outline-offset: 3px;
+}
+
+.advisor-page-link span {
+    font-size: 1.05em;
+}
+
 /* Hero Section */
 .hero {
     min-height: 100vh;
@@ -376,6 +409,11 @@ footer {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+}
+
+.advisor-page-link--footer {
+    padding: 0.8rem 1.15rem;
+    margin-top: 1.5rem;
 }
 
 .footer-logo {
