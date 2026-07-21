@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Pyuton Remote Advisor のアドバイザー向け月額サブスクリプション構想を図解したプロダクト資料">
+  <title>Advisor Subscription Blueprint | Pyuton Remote Advisor</title>
+  <style>
+    :root {
+      --ink: #14261f;
+      --muted: #64716b;
+      --paper: #f5f3ec;
+      --surface: #fffdf8;
+      --surface-2: #edf3ee;
+      --line: #d8ded8;
+      --green: #0f6b4f;
+      --green-dark: #084d39;
+      --green-soft: #d9eee4;
+      --lime: #c8ec65;
+      --coral: #ef775f;
+      --coral-soft: #fde7e1;
+      --blue: #32758d;
+      --blue-soft: #dcecf1;
+      --amber: #b2781c;
+      --amber-soft: #f7e9c8;
+      --shadow: 0 20px 45px rgba(20, 38, 31, 0.08);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 88% 4%, rgba(200, 236, 101, 0.22), transparent 28rem),
+        radial-gradient(circle at 6% 34%, rgba(50, 117, 141, 0.10), transparent 24rem),
+        var(--paper);
+      font-family: "Hiragino Sans", "Yu Gothic UI", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 16px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 24px;
+      height: 2px;
+      background: var(--green);
+      content: "";
+    }
+
+    header {
+      padding: 24px 0 84px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 13px 18px;
+      border: 1px solid rgba(20, 38, 31, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 253, 248, 0.78);
+      box-shadow: 0 10px 30px rgba(20, 38, 31, 0.05);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 50%;
+      color: white;
+      background: var(--green);
+      font-family: Georgia, serif;
+      font-size: 1.25rem;
+      font-style: italic;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.76rem;
+      font-weight: 700;
+    }
+
+    .nav-links a { text-decoration: none; }
+    .nav-links a:hover { color: var(--green); }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
+      gap: 54px;
+      align-items: center;
+      padding-top: 78px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 24px;
+      font-family: Georgia, "Yu Mincho", serif;
+      font-size: clamp(3rem, 6.5vw, 6.4rem);
+      font-weight: 500;
+      letter-spacing: -0.055em;
+      line-height: 0.98;
+    }
+
+    h1 span {
+      display: block;
+      color: var(--green);
+    }
+
+    .hero-copy {
+      max-width: 710px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.16rem);
+    }
+
+    .principle {
+      display: flex;
+      max-width: 700px;
+      gap: 14px;
+      align-items: center;
+      padding: 15px 18px;
+      border-left: 4px solid var(--coral);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      background: var(--coral-soft);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero-board {
+      position: relative;
+      min-height: 440px;
+      padding: 30px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      color: white;
+      background: var(--green-dark);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-board::before {
+      position: absolute;
+      right: -90px;
+      top: -100px;
+      width: 280px;
+      height: 280px;
+      border: 55px solid rgba(200, 236, 101, 0.18);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .board-label {
+      position: relative;
+      margin-bottom: 32px;
+      color: var(--lime);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .price-lockup {
+      position: relative;
+      padding-bottom: 26px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .price-lockup strong {
+      display: block;
+      font-family: Georgia, serif;
+      font-size: clamp(3.3rem, 7vw, 5.4rem);
+      font-weight: 400;
+      line-height: 1;
+    }
+
+    .price-lockup span {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.86rem;
+    }
+
+    .board-points {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      margin-top: 25px;
+    }
+
+    .board-point {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 11px;
+      align-items: center;
+      font-size: 0.88rem;
+    }
+
+    .board-point b {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--green-dark);
+      background: var(--lime);
+      font-size: 0.72rem;
+    }
+
+    main { padding-bottom: 90px; }
+
+    section { margin-bottom: 108px; }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.8fr) minmax(320px, 1.2fr);
+      gap: 50px;
+      align-items: end;
+      margin-bottom: 42px;
+    }
+
+    h2 {
+      margin-bottom: 0;
+      font-family: Georgia, "Yu Mincho", serif;
+      font-size: clamp(2rem, 4vw, 3.7rem);
+      font-weight: 500;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .arch-card {
+      position: relative;
+      min-height: 250px;
+      padding: 31px;
+    }
+
+    .arch-card + .arch-card { border-left: 1px solid var(--line); }
+
+    .arch-number {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      margin-bottom: 45px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--green);
+      background: white;
+      font-family: Georgia, serif;
+      font-size: 1.1rem;
+    }
+
+    .arch-card h3 {
+      margin-bottom: 9px;
+      font-size: 1.2rem;
+    }
+
+    .arch-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .arch-card:nth-child(2) { background: var(--green-soft); }
+    .arch-card:nth-child(2) .arch-number { border-color: transparent; }
+
+    .arch-arrow {
+      position: absolute;
+      z-index: 2;
+      right: -19px;
+      top: 48px;
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: white;
+      font-size: 1.1rem;
+    }
+
+    .caption {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin: 18px 4px 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .caption-mark {
+      flex: 0 0 auto;
+      width: 9px;
+      height: 9px;
+      margin-top: 8px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .flow-card {
+      padding: 29px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+    }
+
+    .flow-card.advisor { border-top: 6px solid var(--green); }
+    .flow-card.user { border-top: 6px solid var(--blue); }
+
+    .flow-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 25px;
+    }
+
+    .flow-kicker {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .flow-top h3 {
+      margin-bottom: 0;
+      font-size: 1.25rem;
+    }
+
+    .actor-icon {
+      display: grid;
+      flex: 0 0 auto;
+      width: 52px;
+      height: 52px;
+      place-items: center;
+      border-radius: 16px;
+      color: white;
+      background: var(--green);
+      font-size: 1.3rem;
+    }
+
+    .user .actor-icon { background: var(--blue); }
+
+    .steps {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      position: relative;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 13px;
+      min-height: 58px;
+      padding-bottom: 15px;
+      font-size: 0.88rem;
+    }
+
+    .steps li:not(:last-child)::before {
+      position: absolute;
+      left: 16px;
+      top: 31px;
+      width: 1px;
+      height: calc(100% - 16px);
+      background: var(--line);
+      content: "";
+    }
+
+    .step-no {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--green);
+      background: var(--green-soft);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .user .step-no {
+      color: var(--blue);
+      background: var(--blue-soft);
+    }
+
+    .step-copy strong { display: block; }
+    .step-copy span { color: var(--muted); font-size: 0.78rem; }
+
+    .models {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .model-card {
+      display: flex;
+      min-height: 235px;
+      flex-direction: column;
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .model-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .model-icon {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      margin-bottom: 28px;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--green-soft);
+      font-size: 1.15rem;
+    }
+
+    .model-card:nth-child(2) .model-icon,
+    .model-card:nth-child(5) .model-icon { background: var(--blue-soft); }
+    .model-card:nth-child(3) .model-icon,
+    .model-card:nth-child(6) .model-icon { background: var(--amber-soft); }
+
+    .model-card h3 { margin-bottom: 7px; font-size: 1.04rem; }
+    .model-card p { margin-bottom: 20px; color: var(--muted); font-size: 0.82rem; }
+
+    .model-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: auto;
+      padding-top: 15px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 800;
+    }
+
+    .model-meta span:last-child { color: var(--green); }
+
+    .rule-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.75fr) minmax(440px, 1.25fr);
+      gap: 24px;
+    }
+
+    .single-month {
+      position: relative;
+      padding: 34px;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      color: white;
+      background: var(--green-dark);
+    }
+
+    .single-month::after {
+      position: absolute;
+      right: -52px;
+      bottom: -58px;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      background: var(--lime);
+      content: "";
+      opacity: 0.15;
+    }
+
+    .single-month .big-one {
+      display: block;
+      margin: 25px 0 8px;
+      color: var(--lime);
+      font-family: Georgia, serif;
+      font-size: 7rem;
+      line-height: 0.85;
+    }
+
+    .single-month h3 { margin-bottom: 10px; font-size: 1.35rem; }
+    .single-month p { max-width: 340px; margin-bottom: 0; color: rgba(255,255,255,0.72); font-size: 0.85rem; }
+
+    .rules {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .rule {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--surface);
+    }
+
+    .rule b {
+      display: inline-grid;
+      width: 26px;
+      height: 26px;
+      margin-bottom: 15px;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--green-dark);
+      background: var(--lime);
+      font-size: 0.75rem;
+    }
+
+    .rule h3 { margin-bottom: 6px; font-size: 0.98rem; }
+    .rule p { margin-bottom: 0; color: var(--muted); font-size: 0.78rem; }
+
+    .privacy-board {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 0;
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .privacy-copy { padding: 38px; }
+    .privacy-copy h3 { margin-bottom: 15px; font-size: 1.4rem; }
+    .privacy-copy p { color: var(--muted); font-size: 0.88rem; }
+
+    .privacy-list {
+      display: grid;
+      gap: 10px;
+      margin: 25px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .privacy-list li {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .privacy-list li::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      content: "";
+    }
+
+    .space-map {
+      display: grid;
+      min-height: 400px;
+      padding: 35px;
+      place-items: center;
+      background: var(--surface-2);
+    }
+
+    .space-shell {
+      width: min(100%, 510px);
+      padding: 18px;
+      border: 2px solid var(--green);
+      border-radius: 24px;
+      background: rgba(255,255,255,0.68);
+    }
+
+    .space-title {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      padding: 2px 4px;
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
+
+    .space-title span:last-child { color: var(--green); }
+
+    .common-room {
+      margin-bottom: 13px;
+      padding: 19px;
+      border-radius: 15px;
+      color: white;
+      background: var(--green);
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+
+    .private-rooms {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 9px;
+    }
+
+    .private-room {
+      min-height: 92px;
+      padding: 15px 8px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: white;
+      text-align: center;
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+
+    .private-room i {
+      display: grid;
+      width: 30px;
+      height: 30px;
+      margin: 0 auto 7px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      font-style: normal;
+    }
+
+    .state-board {
+      padding: 33px;
+      overflow-x: auto;
+      border-radius: var(--radius-lg);
+      background: var(--green-dark);
+      color: white;
+    }
+
+    .state-lane {
+      display: flex;
+      min-width: 880px;
+      gap: 0;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0 6px;
+    }
+
+    .state {
+      position: relative;
+      width: 138px;
+      padding: 17px 10px;
+      border: 1px solid rgba(255,255,255,0.22);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 800;
+    }
+
+    .state.active {
+      color: var(--green-dark);
+      border-color: var(--lime);
+      background: var(--lime);
+    }
+
+    .connector {
+      position: relative;
+      width: 65px;
+      height: 2px;
+      background: rgba(255,255,255,0.38);
+    }
+
+    .connector::after {
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid rgba(255,255,255,0.55);
+      content: "";
+    }
+
+    .state-branch {
+      display: grid;
+      min-width: 880px;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 25px;
+      padding: 22px;
+      border-top: 1px solid rgba(255,255,255,0.16);
+    }
+
+    .branch-card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: center;
+      color: rgba(255,255,255,0.74);
+      font-size: 0.78rem;
+    }
+
+    .branch-card b {
+      color: white;
+      font-size: 0.82rem;
+    }
+
+    .branch-tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--green-dark);
+      background: var(--amber-soft);
+      font-size: 0.67rem;
+      font-weight: 900;
+    }
+
+    .branch-card:last-child .branch-tag { background: var(--coral-soft); }
+
+    .entity-map {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .entity {
+      position: relative;
+      padding: 23px;
+      border-radius: var(--radius-md);
+      background: var(--surface);
+      box-shadow: 0 12px 26px rgba(20,38,31,0.06);
+    }
+
+    .entity:not(:last-child)::after {
+      position: absolute;
+      z-index: 2;
+      right: -18px;
+      top: 50%;
+      width: 35px;
+      color: var(--green);
+      content: "→";
+      font-size: 1.3rem;
+      text-align: center;
+    }
+
+    .entity-tag {
+      display: inline-block;
+      margin-bottom: 18px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      color: var(--green-dark);
+      background: var(--green-soft);
+      font-size: 0.63rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .entity h3 { margin-bottom: 12px; font-size: 1rem; }
+    .entity ul { margin: 0; padding-left: 17px; color: var(--muted); font-size: 0.75rem; }
+    .entity li + li { margin-top: 5px; }
+
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .scope-card {
+      padding: 29px;
+      border-radius: var(--radius-lg);
+    }
+
+    .scope-card.do { background: var(--green-soft); }
+    .scope-card.later { background: var(--coral-soft); }
+    .scope-card h3 { margin-bottom: 20px; font-size: 1.15rem; }
+
+    .scope-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 20px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .scope-list li {
+      position: relative;
+      padding-left: 24px;
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .scope-list li::before {
+      position: absolute;
+      left: 0;
+      top: 1px;
+      content: "✓";
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .later .scope-list li::before {
+      content: "–";
+      color: var(--coral);
+    }
+
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+    }
+
+    .phase {
+      min-height: 285px;
+      padding: 29px;
+    }
+
+    .phase + .phase { border-left: 1px solid var(--line); }
+    .phase:first-child { background: var(--green-dark); color: white; }
+
+    .phase-no {
+      display: inline-block;
+      margin-bottom: 35px;
+      color: var(--green);
+      font-family: Georgia, serif;
+      font-size: 2.7rem;
+      line-height: 1;
+    }
+
+    .phase:first-child .phase-no { color: var(--lime); }
+    .phase h3 { margin-bottom: 12px; font-size: 1.08rem; }
+    .phase p { color: var(--muted); font-size: 0.8rem; }
+    .phase:first-child p { color: rgba(255,255,255,0.7); }
+
+    .decision {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      background: var(--lime);
+    }
+
+    .decision h2 { max-width: 720px; font-size: clamp(2rem, 4vw, 3.4rem); }
+
+    .decision-badge {
+      display: grid;
+      width: 150px;
+      height: 150px;
+      place-items: center;
+      border: 1px solid rgba(8,77,57,0.22);
+      border-radius: 50%;
+      color: var(--green-dark);
+      background: rgba(255,255,255,0.32);
+      text-align: center;
+      font-size: 0.75rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 30px 0 45px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .section-heading, .privacy-board, .rule-layout { grid-template-columns: 1fr; }
+      .hero { padding-top: 55px; }
+      .hero-board { min-height: 390px; }
+      .models { grid-template-columns: repeat(2, 1fr); }
+      .entity-map { grid-template-columns: 1fr 1fr; }
+      .entity:nth-child(2)::after { display: none; }
+      .roadmap { grid-template-columns: 1fr; }
+      .phase + .phase { border-top: 1px solid var(--line); border-left: 0; }
+      .phase { min-height: auto; }
+    }
+
+    @media (max-width: 680px) {
+      .page { width: min(100% - 24px, 1180px); }
+      header { padding-bottom: 65px; }
+      section { margin-bottom: 80px; }
+      .nav-links { display: none; }
+      .hero { gap: 32px; }
+      h1 { font-size: clamp(2.8rem, 15vw, 4.7rem); }
+      .section-heading { gap: 18px; }
+      .architecture, .flow-grid, .models, .rules, .entity-map, .scope-grid { grid-template-columns: 1fr; }
+      .arch-card + .arch-card { border-top: 1px solid var(--line); border-left: 0; }
+      .arch-card { min-height: auto; }
+      .arch-number { margin-bottom: 25px; }
+      .arch-arrow, .entity::after { display: none !important; }
+      .private-rooms { grid-template-columns: 1fr; }
+      .scope-list { grid-template-columns: 1fr; }
+      .decision { grid-template-columns: 1fr; padding: 28px; }
+      .decision-badge { width: 110px; height: 110px; }
+      footer { flex-direction: column; }
+    }
+
+    @media print {
+      body { background: white; }
+      .page { width: 100%; }
+      .nav { display: none; }
+      header { padding-top: 0; }
+      section { break-inside: avoid; margin-bottom: 55px; }
+      .model-card:hover { transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="page">
+      <nav class="nav" aria-label="ページ内ナビゲーション">
+        <div class="brand"><span class="brand-mark">P</span> Pyuton Remote Advisor</div>
+        <div class="nav-links">
+          <a href="#model">基本モデル</a>
+          <a href="#flows">契約フロー</a>
+          <a href="#services">提供形態</a>
+          <a href="#mvp">MVP</a>
+        </div>
+      </nav>
+
+      <div class="hero">
+        <div>
+          <p class="eyebrow">Advisor Revenue Blueprint</p>
+          <h1>指導を、<span>月額で続ける。</span></h1>
+          <p class="hero-copy">動画添削・チャット・アノテーションという既存の強みを、シンプルな月額契約に接続する。個人指導から教室、チームまで、同じ仕組みで育てられる収益モデル。</p>
+          <div class="principle">招待は関係を作る操作。契約はサービスへの同意。決済は利用権を有効にする操作。</div>
+        </div>
+
+        <aside class="hero-board" aria-label="料金モデルの要約">
+          <div class="board-label">ONE BILLING MODEL</div>
+          <div class="price-lockup">
+            <strong>月額</strong>
+            <span>すべての有料指導をサブスクリプションに統一</span>
+          </div>
+          <div class="board-points">
+            <div class="board-point"><b>01</b><span>単発利用も「1か月だけ契約」で扱う</span></div>
+            <div class="board-point"><b>02</b><span>初回決済成功後にスペース利用開始</span></div>
+            <div class="board-point"><b>03</b><span>解約後も支払済み期間の終了まで利用可能</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <section id="model">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Core Architecture</p>
+          <h2>3つの責務を分ける</h2>
+        </div>
+        <p>「スペースを作った人＝料金を受け取る人」とは限らない。既存スペースに決済を直接埋め込まず、指導契約と利用権を独立させることで、両方向の招待やグループ指導に対応します。</p>
+      </div>
+
+      <div class="architecture">
+        <article class="arch-card">
+          <div class="arch-number">1</div>
+          <h3>スペース</h3>
+          <p>動画・画像、タイムラインコメント、アノテーション、チャットを共有する指導の場所。</p>
+          <span class="arch-arrow" aria-hidden="true">→</span>
+        </article>
+        <article class="arch-card">
+          <div class="arch-number">2</div>
+          <h3>指導契約</h3>
+          <p>誰が、誰に、どの月額プランを、いつまで提供するかを固定する合意。</p>
+          <span class="arch-arrow" aria-hidden="true">→</span>
+        </article>
+        <article class="arch-card">
+          <div class="arch-number">3</div>
+          <h3>決済・利用権</h3>
+          <p>誰が支払い、誰が売上を受け取り、いつスペースを利用できるかを管理。</p>
+        </article>
+      </div>
+      <p class="caption"><span class="caption-mark"></span>招待受諾だけでは有料スペースを開放せず、契約同意と初回決済の成功を利用開始条件にします。</p>
+    </section>
+
+    <section id="flows">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Two Entry Points</p>
+          <h2>入口は2つ、契約は1つ</h2>
+        </div>
+        <p>アドバイザーから既存顧客を招く場合も、一般ユーザーが専門家を探して依頼する場合も、最終的には同じ月額サブスクリプションを開始します。</p>
+      </div>
+
+      <div class="flow-grid">
+        <article class="flow-card advisor">
+          <div class="flow-top">
+            <div><span class="flow-kicker">Advisor initiated</span><h3>アドバイザーが招待</h3></div>
+            <div class="actor-icon" aria-hidden="true">A</div>
+          </div>
+          <ol class="steps">
+            <li><span class="step-no">1</span><div class="step-copy"><strong>月額プランを作成</strong><span>料金・提供内容・個人／グループを設定</span></div></li>
+            <li><span class="step-no">2</span><div class="step-copy"><strong>スペースへユーザーを招待</strong><span>既存顧客、教室の生徒、チーム代表者など</span></div></li>
+            <li><span class="step-no">3</span><div class="step-copy"><strong>ユーザーが内容に同意</strong><span>招待と契約同意は別操作として記録</span></div></li>
+            <li><span class="step-no">4</span><div class="step-copy"><strong>初回決済後に利用開始</strong><span>以降は毎月自動更新</span></div></li>
+          </ol>
+        </article>
+
+        <article class="flow-card user">
+          <div class="flow-top">
+            <div><span class="flow-kicker">User initiated</span><h3>一般ユーザーが依頼</h3></div>
+            <div class="actor-icon" aria-hidden="true">U</div>
+          </div>
+          <ol class="steps">
+            <li><span class="step-no">1</span><div class="step-copy"><strong>アドバイザーを検索</strong><span>専門分野・プロフィール・受付状況から選択</span></div></li>
+            <li><span class="step-no">2</span><div class="step-copy"><strong>月額プランを選び依頼</strong><span>既存スペースまたは新しいスペースを指定</span></div></li>
+            <li><span class="step-no">3</span><div class="step-copy"><strong>アドバイザーが受諾</strong><span>自動受諾または審査制を選択可能</span></div></li>
+            <li><span class="step-no">4</span><div class="step-copy"><strong>初回決済後に利用開始</strong><span>同じ月額契約モデルへ合流</span></div></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Service Formats</p>
+          <h2>月額のまま、提供形態を広げる</h2>
+        </div>
+        <p>料金ロジックを増やさず、「誰が契約するか」「スペースをどう構成するか」でサービスの幅を作ります。</p>
+      </div>
+
+      <div class="models">
+        <article class="model-card"><div class="model-icon">↔</div><h3>1対1の個人指導</h3><p>動画添削とチャットを継続し、日常練習のフィードバックループを作る。</p><div class="model-meta"><span>ユーザーごと</span><span>個人スペース</span></div></article>
+        <article class="model-card"><div class="model-icon">◎</div><h3>少人数教室</h3><p>共通課題を配信しつつ、生徒ごとの動画には非公開で個別指導する。</p><div class="model-meta"><span>参加者ごと</span><span>共通＋個人領域</span></div></article>
+        <article class="model-card"><div class="model-icon">△</div><h3>有料コミュニティ</h3><p>定期的な練習情報、公開質問、簡易フィードバックをメンバーへ提供。</p><div class="model-meta"><span>参加者ごと</span><span>共通スペース</span></div></article>
+        <article class="model-card"><div class="model-icon">◫</div><h3>チーム指導</h3><p>試合・練習動画をまとめて分析し、チーム全体へ継続的に助言する。</p><div class="model-meta"><span>代表者が契約</span><span>チームスペース</span></div></article>
+        <article class="model-card"><div class="model-icon">◇</div><h3>対面レッスンのフォロー</h3><p>次回レッスンまでの自主練習を確認し、対面指導の価値を高める。</p><div class="model-meta"><span>生徒ごと</span><span>個人スペース</span></div></article>
+        <article class="model-card"><div class="model-icon">→</div><h3>期間プログラム</h3><p>4週間・3か月などのプログラムも、必要な月数だけ継続する月額契約で扱う。</p><div class="model-meta"><span>参加者ごと</span><span>期間スペース</span></div></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Simple Billing Rules</p>
+          <h2>単発も、1か月契約</h2>
+        </div>
+        <p>単発商品を別に作らず、契約直後に「期間終了時の解約」を予約できるようにします。日割りや即時解約を持たず、支払済み期間の利用権を保証します。</p>
+      </div>
+
+      <div class="rule-layout">
+        <aside class="single-month">
+          <span class="flow-kicker">For a one-time need</span>
+          <span class="big-one">1</span>
+          <h3>か月だけ利用</h3>
+          <p>契約後すぐ解約予約しても、当月の終了日までは通常どおり利用できます。</p>
+        </aside>
+        <div class="rules">
+          <article class="rule"><b>1</b><h3>契約日に課金</h3><p>初回決済の成功と同時に利用期間を開始。</p></article>
+          <article class="rule"><b>2</b><h3>毎月同日に更新</h3><p>日割りや月末締めを設けず契約日基準に統一。</p></article>
+          <article class="rule"><b>3</b><h3>期間終了時に解約</h3><p>即時解約を設けず、支払済み期間を使い切る。</p></article>
+          <article class="rule"><b>4</b><h3>返金は例外対応</h3><p>自動返金ロジックを持たず、管理者が必要時のみ処理。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Privacy by Design</p>
+          <h2>教室は「共通＋個人」</h2>
+        </div>
+        <p>複数人レッスンで全動画を全員へ公開すると、フォーム、顔、撮影場所などが意図せず共有されます。共通課題と個別提出を分離します。</p>
+      </div>
+
+      <div class="privacy-board">
+        <div class="privacy-copy">
+          <h3>ひとつの教室に、2種類の見え方</h3>
+          <p>アドバイザーは全領域を確認でき、生徒は共通領域と自分の個人領域だけを閲覧できます。</p>
+          <ul class="privacy-list">
+            <li>共通領域：課題・教材・全体連絡</li>
+            <li>個人領域：提出動画・添削・相談</li>
+            <li>契約終了後：閲覧のみ、またはアーカイブ</li>
+          </ul>
+        </div>
+        <div class="space-map" role="img" aria-label="クラス共通領域と3人分の非公開個人領域の図">
+          <div class="space-shell">
+            <div class="space-title"><span>少人数クラス</span><span>ADVISOR VIEW: ALL</span></div>
+            <div class="common-room">共通領域　｜　課題・教材・お知らせ</div>
+            <div class="private-rooms">
+              <div class="private-room"><i>🔒</i>生徒 A<br>個人領域</div>
+              <div class="private-room"><i>🔒</i>生徒 B<br>個人領域</div>
+              <div class="private-room"><i>🔒</i>生徒 C<br>個人領域</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Subscription Lifecycle</p>
+          <h2>契約状態は5つだけ</h2>
+        </div>
+        <p>正常系と支払い失敗を最小限の状態で表現します。支払い失敗には短い猶予期間を設け、軽微なカード問題で即座に指導が途切れないようにします。</p>
+      </div>
+
+      <div class="state-board" aria-label="サブスクリプション状態遷移図">
+        <div class="state-lane">
+          <div class="state">pending<br>承認・決済待ち</div><div class="connector"></div>
+          <div class="state active">active<br>利用中</div><div class="connector"></div>
+          <div class="state">canceling<br>解約予約</div><div class="connector"></div>
+          <div class="state">ended<br>利用終了</div>
+        </div>
+        <div class="state-branch">
+          <div class="branch-card"><span class="branch-tag">PAYMENT FAILED</span><div><b>active → past_due</b><br>7日程度の猶予期間中に再決済を試みる</div></div>
+          <div class="branch-card"><span class="branch-tag">GRACE ENDED</span><div><b>past_due → ended</b><br>投稿・コメントを停止しスペースをアーカイブ</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Domain Building Blocks</p>
+          <h2>必要な4つの概念</h2>
+        </div>
+        <p>商品、契約、決済、利用場所を別々に記録します。料金変更後も既存契約を守るため、契約時点の価格と提供条件はスナップショットとして保持します。</p>
+      </div>
+
+      <div class="entity-map">
+        <article class="entity"><span class="entity-tag">OFFERING</span><h3>月額プラン</h3><ul><li>アドバイザー</li><li>名称・説明</li><li>月額料金</li><li>個人／グループ</li><li>受付状態・定員</li></ul></article>
+        <article class="entity"><span class="entity-tag">AGREEMENT</span><h3>指導契約</h3><ul><li>契約者・受講者</li><li>アドバイザー</li><li>契約時の条件</li><li>開始日・更新日</li><li>契約状態</li></ul></article>
+        <article class="entity"><span class="entity-tag">BILLING</span><h3>サブスクリプション</h3><ul><li>決済サービスID</li><li>現在の利用期間</li><li>次回更新</li><li>解約予約</li><li>支払い状態</li></ul></article>
+        <article class="entity"><span class="entity-tag">ENTITLEMENT</span><h3>スペース利用権</h3><ul><li>対象スペース</li><li>投稿・閲覧権限</li><li>有効開始・終了</li><li>共通／個人領域</li><li>終了後アーカイブ</li></ul></article>
+      </div>
+    </section>
+
+    <section id="mvp">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">MVP Boundary</p>
+          <h2>最初に作るもの、作らないもの</h2>
+        </div>
+        <p>検証したいのは「継続的な動画指導に毎月払うか」です。価格計算の機能を増やさず、契約継続率とアドバイザーの運用負荷を測ります。</p>
+      </div>
+
+      <div class="scope-grid">
+        <article class="scope-card do"><h3>初期リリースに含める</h3><ul class="scope-list"><li>1対1月額指導</li><li>グループ月額指導</li><li>毎月同額の自動更新</li><li>両方向の招待</li><li>期間終了時解約</li><li>支払い失敗の猶予</li><li>契約終了後アーカイブ</li><li>管理者による例外返金</li></ul></article>
+        <article class="scope-card later"><h3>初期リリースでは作らない</h3><ul class="scope-list"><li>単発決済</li><li>日割り計算</li><li>回数券・従量課金</li><li>追加オプション</li><li>クーポン・無料体験</li><li>年額・人数割引</li><li>プラン途中変更</li><li>複数人への売上分配</li></ul></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Delivery Roadmap</p>
+          <h2>小さく始めて広げる</h2>
+        </div>
+        <p>料金モデルは変えず、スペースの構成と契約主体を段階的に増やします。</p>
+      </div>
+
+      <div class="roadmap">
+        <article class="phase"><span class="phase-no">01</span><h3>個人指導 MVP</h3><p>1対1スペース、月額契約、初回決済、更新、解約、支払い失敗を実装。最短で支払意欲を検証します。</p></article>
+        <article class="phase"><span class="phase-no">02</span><h3>教室・コミュニティ</h3><p>参加者ごとの契約、定員、共通領域と個人非公開領域を追加。既存顧客を持つアドバイザーへ展開します。</p></article>
+        <article class="phase"><span class="phase-no">03</span><h3>チーム・組織</h3><p>代表支払い、組織メンバー、複数アドバイザーを追加。法人・学校・スクール契約へ拡張します。</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="decision">
+        <h2>まずは「毎月同額・いつでも次回更新を停止できる」だけで始める。</h2>
+        <div class="decision-badge">RECOMMENDED<br>MVP</div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page">
+    <span>Pyuton Remote Advisor — Advisor Subscription Blueprint</span>
+    <span>Product concept / Subscription-first / July 2026</span>
+  </footer>
+</body>
+</html>
