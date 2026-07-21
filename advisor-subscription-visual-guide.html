@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Pyuton Remote Advisor のアドバイザー向け月額サブスクリプション構想を図解したプロダクト資料">
-  <title>Advisor Subscription Blueprint | Pyuton Remote Advisor</title>
+  <meta name="description" content="Share Hopperを使って、動画を見ながら伝わるスポーツ指導を行うための指導者向けガイド">
+  <title>指導者向けガイド | Share Hopper</title>
   <style>
     :root {
       --ink: #14261f;
@@ -94,6 +94,7 @@
       font-size: 0.9rem;
       font-weight: 800;
       letter-spacing: 0.01em;
+      text-decoration: none;
     }
 
     .brand-mark {
@@ -107,6 +108,7 @@
       font-family: Georgia, serif;
       font-size: 1.25rem;
       font-style: italic;
+      object-fit: cover;
     }
 
     .nav-links {
@@ -967,33 +969,36 @@
   <header>
     <div class="page">
       <nav class="nav" aria-label="ページ内ナビゲーション">
-        <div class="brand"><span class="brand-mark">P</span> Pyuton Remote Advisor</div>
+        <a class="brand" href="index.html" aria-label="Share Hopper トップページ">
+          <img class="brand-mark" src="assets/logo.png" alt="">
+          Share Hopper
+        </a>
         <div class="nav-links">
-          <a href="#model">基本モデル</a>
-          <a href="#flows">契約フロー</a>
-          <a href="#services">提供形態</a>
-          <a href="#mvp">MVP</a>
+          <a href="index.html#home">ホーム</a>
+          <a href="index.html#features">特長</a>
+          <a href="advisor-subscription-visual-guide.html" aria-current="page">指導者向け資料</a>
+          <a href="https://apps.apple.com/jp/app/id6762832513" target="_blank" rel="noopener">App Store</a>
         </div>
       </nav>
 
       <div class="hero">
         <div>
-          <p class="eyebrow">Advisor Revenue Blueprint</p>
-          <h1>指導を、<span>月額で続ける。</span></h1>
-          <p class="hero-copy">動画添削・チャット・アノテーションという既存の強みを、シンプルな月額契約に接続する。個人指導から教室、チームまで、同じ仕組みで育てられる収益モデル。</p>
-          <div class="principle">招待は関係を作る操作。契約はサービスへの同意。決済は利用権を有効にする操作。</div>
+          <p class="eyebrow">Share Hopper for Coaches</p>
+          <h1>見て、伝えて、<span>成長を支える。</span></h1>
+          <p class="hero-copy">Share Hopperは、練習動画を見ながらポイントを伝え、日々の成長を一緒に振り返るためのアプリです。指導の時間だけでは伝えきれない気づきを、より具体的に届けられます。</p>
+          <div class="principle">動画に書き込む。時間を指定してコメントする。チャットで次の練習につなげる。</div>
         </div>
 
-        <aside class="hero-board" aria-label="料金モデルの要約">
-          <div class="board-label">ONE BILLING MODEL</div>
+        <aside class="hero-board" aria-label="Share Hopperでできることの要約">
+          <div class="board-label">COACHING AT A GLANCE</div>
           <div class="price-lockup">
-            <strong>月額</strong>
-            <span>すべての有料指導をサブスクリプションに統一</span>
+            <strong>動画で</strong>
+            <span>動きの意図まで、まっすぐ伝える</span>
           </div>
           <div class="board-points">
-            <div class="board-point"><b>01</b><span>単発利用も「1か月だけ契約」で扱う</span></div>
-            <div class="board-point"><b>02</b><span>初回決済成功後にスペース利用開始</span></div>
-            <div class="board-point"><b>03</b><span>解約後も支払済み期間の終了まで利用可能</span></div>
+            <div class="board-point"><b>01</b><span>指導したい相手だけを招待したスペース</span></div>
+            <div class="board-point"><b>02</b><span>画面への書き込みと時間指定コメント</span></div>
+            <div class="board-point"><b>03</b><span>練習の振り返りを続けるチャット</span></div>
           </div>
         </aside>
       </div>
@@ -1004,67 +1009,67 @@
     <section id="model">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Core Architecture</p>
-          <h2>3つの責務を分ける</h2>
+          <p class="eyebrow">What You Can Do</p>
+          <h2>伝わる指導を、もっと身近に</h2>
         </div>
-        <p>「スペースを作った人＝料金を受け取る人」とは限らない。既存スペースに決済を直接埋め込まず、指導契約と利用権を独立させることで、両方向の招待やグループ指導に対応します。</p>
+        <p>口頭だけでは見落としがちな動きの違いや、次の練習までに意識してほしいことを、動画と一緒に残せます。選手や保護者が見返せるから、アドバイスが日々の練習につながります。</p>
       </div>
 
       <div class="architecture">
         <article class="arch-card">
           <div class="arch-number">1</div>
-          <h3>スペース</h3>
-          <p>動画・画像、タイムラインコメント、アノテーション、チャットを共有する指導の場所。</p>
+          <h3>動画を共有する</h3>
+          <p>練習や試合の動画を、招待した相手だけのスペースで共有。過去の動画も並べて成長を振り返れます。</p>
           <span class="arch-arrow" aria-hidden="true">→</span>
         </article>
         <article class="arch-card">
           <div class="arch-number">2</div>
-          <h3>指導契約</h3>
-          <p>誰が、誰に、どの月額プランを、いつまで提供するかを固定する合意。</p>
+          <h3>動きを見て伝える</h3>
+          <p>気になる場面で動画を止め、画面に線や図形を書き込みながら、フォームや動きのポイントを示せます。</p>
           <span class="arch-arrow" aria-hidden="true">→</span>
         </article>
         <article class="arch-card">
           <div class="arch-number">3</div>
-          <h3>決済・利用権</h3>
-          <p>誰が支払い、誰が売上を受け取り、いつスペースを利用できるかを管理。</p>
+          <h3>次の練習につなげる</h3>
+          <p>タイムラインコメントとチャットで、具体的なアドバイスや質問への返答をいつでも確認できます。</p>
         </article>
       </div>
-      <p class="caption"><span class="caption-mark"></span>招待受諾だけでは有料スペースを開放せず、契約同意と初回決済の成功を利用開始条件にします。</p>
+      <p class="caption"><span class="caption-mark"></span>動画・書き込み・コメントを同じ場所に残せるので、指導の要点が散らかりません。</p>
     </section>
 
     <section id="flows">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Two Entry Points</p>
-          <h2>入口は2つ、契約は1つ</h2>
+          <p class="eyebrow">Getting Started</p>
+          <h2>はじめるのは、かんたんです</h2>
         </div>
-        <p>アドバイザーから既存顧客を招く場合も、一般ユーザーが専門家を探して依頼する場合も、最終的には同じ月額サブスクリプションを開始します。</p>
+        <p>まずは、普段指導している選手やご家族とのやりとりから。対面レッスンの補足にも、離れた場所からの動画指導にも使えます。</p>
       </div>
 
       <div class="flow-grid">
         <article class="flow-card advisor">
           <div class="flow-top">
-            <div><span class="flow-kicker">Advisor initiated</span><h3>アドバイザーが招待</h3></div>
-            <div class="actor-icon" aria-hidden="true">A</div>
+            <div><span class="flow-kicker">Start as a coach</span><h3>指導者から始める</h3></div>
+            <div class="actor-icon" aria-hidden="true">指</div>
           </div>
           <ol class="steps">
-            <li><span class="step-no">1</span><div class="step-copy"><strong>月額プランを作成</strong><span>料金・提供内容・個人／グループを設定</span></div></li>
-            <li><span class="step-no">2</span><div class="step-copy"><strong>スペースへユーザーを招待</strong><span>既存顧客、教室の生徒、チーム代表者など</span></div></li>
-            <li><span class="step-no">3</span><div class="step-copy"><strong>ユーザーが内容に同意</strong><span>招待と契約同意は別操作として記録</span></div></li>
-            <li><span class="step-no">4</span><div class="step-copy"><strong>初回決済後に利用開始</strong><span>以降は毎月自動更新</span></div></li>
+            <li><span class="step-no">1</span><div class="step-copy"><strong>スペースをつくる</strong><span>個人、チーム、教室など、指導する単位ごとに用意します。</span></div></li>
+            <li><span class="step-no">2</span><div class="step-copy"><strong>選手や保護者を招待する</strong><span>指導に関わる相手だけをスペースへ招待します。</span></div></li>
+            <li><span class="step-no">3</span><div class="step-copy"><strong>動画を受け取り、確認する</strong><span>練習や試合の動画を見ながら、伝えたい場面を見つけます。</span></div></li>
+            <li><span class="step-no">4</span><div class="step-copy"><strong>アドバイスを残す</strong><span>書き込み、時間指定コメント、チャットで次の一歩を伝えます。</span></div></li>
           </ol>
         </article>
 
         <article class="flow-card user">
           <div class="flow-top">
-            <div><span class="flow-kicker">User initiated</span><h3>一般ユーザーが依頼</h3></div>
-            <div class="actor-icon" aria-hidden="true">U</div>
+            <div><span class="flow-kicker">Support the learning</span><h3>選手が取り組む</h3></div>
+            <div class="actor-icon" aria-hidden="true">選</div>
           </div>
           <ol class="steps">
-            <li><span class="step-no">1</span><div class="step-copy"><strong>アドバイザーを検索</strong><span>専門分野・プロフィール・受付状況から選択</span></div></li>
-            <li><span class="step-no">2</span><div class="step-copy"><strong>月額プランを選び依頼</strong><span>既存スペースまたは新しいスペースを指定</span></div></li>
-            <li><span class="step-no">3</span><div class="step-copy"><strong>アドバイザーが受諾</strong><span>自動受諾または審査制を選択可能</span></div></li>
-            <li><span class="step-no">4</span><div class="step-copy"><strong>初回決済後に利用開始</strong><span>同じ月額契約モデルへ合流</span></div></li>
+            <li><span class="step-no">1</span><div class="step-copy"><strong>練習を撮影して送る</strong><span>見てほしい動きや、うまくいかなかった場面を共有します。</span></div></li>
+            <li><span class="step-no">2</span><div class="step-copy"><strong>アドバイスを見る</strong><span>書き込みとコメントで、どの動きを直すかが分かります。</span></div></li>
+            <li><span class="step-no">3</span><div class="step-copy"><strong>練習で試す</strong><span>次に意識することを一つ決めて、繰り返し練習します。</span></div></li>
+            <li><span class="step-no">4</span><div class="step-copy"><strong>振り返りを続ける</strong><span>次の動画で変化を確かめ、会話を積み重ねます。</span></div></li>
           </ol>
         </article>
       </div>
@@ -1073,43 +1078,43 @@
     <section id="services">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Service Formats</p>
-          <h2>月額のまま、提供形態を広げる</h2>
+          <p class="eyebrow">Coaching Styles</p>
+          <h2>あなたの指導スタイルに合わせて</h2>
         </div>
-        <p>料金ロジックを増やさず、「誰が契約するか」「スペースをどう構成するか」でサービスの幅を作ります。</p>
+        <p>Share Hopperは、日々の個人練習から、チームや教室での振り返りまで、さまざまな指導の場面で使えます。</p>
       </div>
 
       <div class="models">
-        <article class="model-card"><div class="model-icon">↔</div><h3>1対1の個人指導</h3><p>動画添削とチャットを継続し、日常練習のフィードバックループを作る。</p><div class="model-meta"><span>ユーザーごと</span><span>個人スペース</span></div></article>
-        <article class="model-card"><div class="model-icon">◎</div><h3>少人数教室</h3><p>共通課題を配信しつつ、生徒ごとの動画には非公開で個別指導する。</p><div class="model-meta"><span>参加者ごと</span><span>共通＋個人領域</span></div></article>
-        <article class="model-card"><div class="model-icon">△</div><h3>有料コミュニティ</h3><p>定期的な練習情報、公開質問、簡易フィードバックをメンバーへ提供。</p><div class="model-meta"><span>参加者ごと</span><span>共通スペース</span></div></article>
-        <article class="model-card"><div class="model-icon">◫</div><h3>チーム指導</h3><p>試合・練習動画をまとめて分析し、チーム全体へ継続的に助言する。</p><div class="model-meta"><span>代表者が契約</span><span>チームスペース</span></div></article>
-        <article class="model-card"><div class="model-icon">◇</div><h3>対面レッスンのフォロー</h3><p>次回レッスンまでの自主練習を確認し、対面指導の価値を高める。</p><div class="model-meta"><span>生徒ごと</span><span>個人スペース</span></div></article>
-        <article class="model-card"><div class="model-icon">→</div><h3>期間プログラム</h3><p>4週間・3か月などのプログラムも、必要な月数だけ継続する月額契約で扱う。</p><div class="model-meta"><span>参加者ごと</span><span>期間スペース</span></div></article>
+        <article class="model-card"><div class="model-icon">↔</div><h3>1対1の個人指導</h3><p>一人ひとりの動画に合わせて、具体的な改善点と次の練習を伝えられます。</p><div class="model-meta"><span>じっくり見る</span><span>個人スペース</span></div></article>
+        <article class="model-card"><div class="model-icon">◎</div><h3>少人数のレッスン</h3><p>共通の課題を共有しながら、それぞれの動きに合わせたアドバイスも残せます。</p><div class="model-meta"><span>一緒に学ぶ</span><span>グループ</span></div></article>
+        <article class="model-card"><div class="model-icon">△</div><h3>日々の自主練習</h3><p>対面で会えない日も、短い動画で練習の様子を受け取り、声をかけられます。</p><div class="model-meta"><span>継続を支える</span><span>日常の練習</span></div></article>
+        <article class="model-card"><div class="model-icon">◫</div><h3>チームの振り返り</h3><p>練習や試合の映像を共有して、チーム全体で次に取り組むことをそろえられます。</p><div class="model-meta"><span>みんなで見る</span><span>チーム</span></div></article>
+        <article class="model-card"><div class="model-icon">◇</div><h3>対面指導のフォロー</h3><p>レッスン直後のポイントを残しておけば、次回までの練習で迷いにくくなります。</p><div class="model-meta"><span>記憶をつなぐ</span><span>レッスン後</span></div></article>
+        <article class="model-card"><div class="model-icon">→</div><h3>成長の記録</h3><p>過去の動画を見返すことで、できるようになった動きや努力の積み重ねを確かめられます。</p><div class="model-meta"><span>変化を実感</span><span>振り返り</span></div></article>
       </div>
     </section>
 
     <section>
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Simple Billing Rules</p>
-          <h2>単発も、1か月契約</h2>
+          <p class="eyebrow">Make Feedback Count</p>
+          <h2>伝えたいことを、ひとつずつ</h2>
         </div>
-        <p>単発商品を別に作らず、契約直後に「期間終了時の解約」を予約できるようにします。日割りや即時解約を持たず、支払済み期間の利用権を保証します。</p>
+        <p>動画を見て気づいたことをすべて伝えるよりも、次の練習で試せることを一つに絞ると、選手は動き出しやすくなります。Share Hopperなら、そのポイントを映像と一緒に残せます。</p>
       </div>
 
       <div class="rule-layout">
         <aside class="single-month">
-          <span class="flow-kicker">For a one-time need</span>
+          <span class="flow-kicker">Start with one point</span>
           <span class="big-one">1</span>
-          <h3>か月だけ利用</h3>
-          <p>契約後すぐ解約予約しても、当月の終了日までは通常どおり利用できます。</p>
+          <h3>動画に、ひとつのねらい</h3>
+          <p>「今回はここを見よう」と決めてから動画を見ると、短くても実行しやすいアドバイスになります。</p>
         </aside>
         <div class="rules">
-          <article class="rule"><b>1</b><h3>契約日に課金</h3><p>初回決済の成功と同時に利用期間を開始。</p></article>
-          <article class="rule"><b>2</b><h3>毎月同日に更新</h3><p>日割りや月末締めを設けず契約日基準に統一。</p></article>
-          <article class="rule"><b>3</b><h3>期間終了時に解約</h3><p>即時解約を設けず、支払済み期間を使い切る。</p></article>
-          <article class="rule"><b>4</b><h3>返金は例外対応</h3><p>自動返金ロジックを持たず、管理者が必要時のみ処理。</p></article>
+          <article class="rule"><b>1</b><h3>場面を止める</h3><p>伝えたい動きが見える場面で動画を止めます。</p></article>
+          <article class="rule"><b>2</b><h3>目印をつける</h3><p>線や図形で、目線・姿勢・方向などを分かりやすく示します。</p></article>
+          <article class="rule"><b>3</b><h3>短い言葉にする</h3><p>次の練習で試すことを、前向きで具体的な言葉にします。</p></article>
+          <article class="rule"><b>4</b><h3>次に見返す</h3><p>次の動画と比べて、小さな変化も一緒に確認します。</p></article>
         </div>
       </div>
     </section>
@@ -1117,30 +1122,30 @@
     <section>
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Privacy by Design</p>
-          <h2>教室は「共通＋個人」</h2>
+          <p class="eyebrow">A Space for Your Team</p>
+          <h2>安心して動画を共有する</h2>
         </div>
-        <p>複数人レッスンで全動画を全員へ公開すると、フォーム、顔、撮影場所などが意図せず共有されます。共通課題と個別提出を分離します。</p>
+        <p>Share Hopperのスペースは招待制です。指導する選手や保護者、コーチなど、必要なメンバーだけで練習の記録と会話を共有できます。</p>
       </div>
 
       <div class="privacy-board">
         <div class="privacy-copy">
-          <h3>ひとつの教室に、2種類の見え方</h3>
-          <p>アドバイザーは全領域を確認でき、生徒は共通領域と自分の個人領域だけを閲覧できます。</p>
+          <h3>指導に必要な人だけで</h3>
+          <p>動画、書き込み、コメント、チャットを、同じスペースにまとめられます。誰に何を伝えたかを見失わず、対面の指導の続きを自然に始められます。</p>
           <ul class="privacy-list">
-            <li>共通領域：課題・教材・全体連絡</li>
-            <li>個人領域：提出動画・添削・相談</li>
-            <li>契約終了後：閲覧のみ、またはアーカイブ</li>
+            <li>招待したメンバーだけで共有</li>
+            <li>動画とアドバイスを一か所に整理</li>
+            <li>いつでも過去のやりとりを振り返る</li>
           </ul>
         </div>
-        <div class="space-map" role="img" aria-label="クラス共通領域と3人分の非公開個人領域の図">
+        <div class="space-map" role="img" aria-label="指導者と3人の選手が招待制スペースで動画を共有するイメージ">
           <div class="space-shell">
-            <div class="space-title"><span>少人数クラス</span><span>ADVISOR VIEW: ALL</span></div>
-            <div class="common-room">共通領域　｜　課題・教材・お知らせ</div>
+            <div class="space-title"><span>チームのスペース</span><span>INVITED MEMBERS</span></div>
+            <div class="common-room">共有の場　｜　動画・アドバイス・会話</div>
             <div class="private-rooms">
-              <div class="private-room"><i>🔒</i>生徒 A<br>個人領域</div>
-              <div class="private-room"><i>🔒</i>生徒 B<br>個人領域</div>
-              <div class="private-room"><i>🔒</i>生徒 C<br>個人領域</div>
+              <div class="private-room"><i>▶</i>選手 A<br>練習動画</div>
+              <div class="private-room"><i>▶</i>選手 B<br>練習動画</div>
+              <div class="private-room"><i>▶</i>選手 C<br>練習動画</div>
             </div>
           </div>
         </div>
@@ -1150,22 +1155,22 @@
     <section>
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Subscription Lifecycle</p>
-          <h2>契約状態は5つだけ</h2>
+          <p class="eyebrow">A Better Feedback Loop</p>
+          <h2>動画が、次の成長につながる</h2>
         </div>
-        <p>正常系と支払い失敗を最小限の状態で表現します。支払い失敗には短い猶予期間を設け、軽微なカード問題で即座に指導が途切れないようにします。</p>
+        <p>動画を送る、見てもらう、試してみる。この小さな流れを繰り返すことで、指導の言葉が日々の動きに結びついていきます。</p>
       </div>
 
-      <div class="state-board" aria-label="サブスクリプション状態遷移図">
+      <div class="state-board" aria-label="動画を使った指導の流れ">
         <div class="state-lane">
-          <div class="state">pending<br>承認・決済待ち</div><div class="connector"></div>
-          <div class="state active">active<br>利用中</div><div class="connector"></div>
-          <div class="state">canceling<br>解約予約</div><div class="connector"></div>
-          <div class="state">ended<br>利用終了</div>
+          <div class="state">share<br>動画を送る</div><div class="connector"></div>
+          <div class="state active">review<br>動きを見る</div><div class="connector"></div>
+          <div class="state">feedback<br>言葉を残す</div><div class="connector"></div>
+          <div class="state">practice<br>次に試す</div>
         </div>
         <div class="state-branch">
-          <div class="branch-card"><span class="branch-tag">PAYMENT FAILED</span><div><b>active → past_due</b><br>7日程度の猶予期間中に再決済を試みる</div></div>
-          <div class="branch-card"><span class="branch-tag">GRACE ENDED</span><div><b>past_due → ended</b><br>投稿・コメントを停止しスペースをアーカイブ</div></div>
+          <div class="branch-card"><span class="branch-tag">KEEP IT SPECIFIC</span><div><b>動画の時間を指定する</b><br>「どの場面の、どの動きか」が分かると、言葉がより伝わります。</div></div>
+          <div class="branch-card"><span class="branch-tag">NOTICE PROGRESS</span><div><b>小さな変化を言葉にする</b><br>できたことも残すと、次の挑戦への自信につながります。</div></div>
         </div>
       </div>
     </section>
@@ -1173,62 +1178,62 @@
     <section>
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Domain Building Blocks</p>
-          <h2>必要な4つの概念</h2>
+          <p class="eyebrow">Everything in One Place</p>
+          <h2>指導に必要なものを、ひとつの場所に</h2>
         </div>
-        <p>商品、契約、決済、利用場所を別々に記録します。料金変更後も既存契約を守るため、契約時点の価格と提供条件はスナップショットとして保持します。</p>
+        <p>「あのとき何を伝えたか」「前回からどこが変わったか」を、動画を開けばすぐに確認できます。毎回同じ説明を繰り返す負担も減らせます。</p>
       </div>
 
       <div class="entity-map">
-        <article class="entity"><span class="entity-tag">OFFERING</span><h3>月額プラン</h3><ul><li>アドバイザー</li><li>名称・説明</li><li>月額料金</li><li>個人／グループ</li><li>受付状態・定員</li></ul></article>
-        <article class="entity"><span class="entity-tag">AGREEMENT</span><h3>指導契約</h3><ul><li>契約者・受講者</li><li>アドバイザー</li><li>契約時の条件</li><li>開始日・更新日</li><li>契約状態</li></ul></article>
-        <article class="entity"><span class="entity-tag">BILLING</span><h3>サブスクリプション</h3><ul><li>決済サービスID</li><li>現在の利用期間</li><li>次回更新</li><li>解約予約</li><li>支払い状態</li></ul></article>
-        <article class="entity"><span class="entity-tag">ENTITLEMENT</span><h3>スペース利用権</h3><ul><li>対象スペース</li><li>投稿・閲覧権限</li><li>有効開始・終了</li><li>共通／個人領域</li><li>終了後アーカイブ</li></ul></article>
+        <article class="entity"><span class="entity-tag">VIDEO</span><h3>練習の記録</h3><ul><li>練習・試合の動画</li><li>過去との比較</li><li>見てほしい場面</li><li>成長の積み重ね</li></ul></article>
+        <article class="entity"><span class="entity-tag">ANNOTATION</span><h3>画面への書き込み</h3><ul><li>フォームの目印</li><li>動く方向の矢印</li><li>姿勢のポイント</li><li>見てほしい位置</li></ul></article>
+        <article class="entity"><span class="entity-tag">COMMENT</span><h3>時間指定コメント</h3><ul><li>気になる瞬間</li><li>具体的な言葉</li><li>次に試すこと</li><li>できたことの確認</li></ul></article>
+        <article class="entity"><span class="entity-tag">CHAT</span><h3>チャット</h3><ul><li>質問への返答</li><li>練習後のひとこと</li><li>保護者との連絡</li><li>チーム内の共有</li></ul></article>
       </div>
     </section>
 
-    <section id="mvp">
+    <section id="tips">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">MVP Boundary</p>
-          <h2>最初に作るもの、作らないもの</h2>
+          <p class="eyebrow">Tips for Coaches</p>
+          <h2>より伝わる指導のために</h2>
         </div>
-        <p>検証したいのは「継続的な動画指導に毎月払うか」です。価格計算の機能を増やさず、契約継続率とアドバイザーの運用負荷を測ります。</p>
+        <p>長い説明よりも、見返したときにすぐ試せる一言を。Share Hopperを、指導の記録と前向きな会話を続ける場所として使ってみてください。</p>
       </div>
 
       <div class="scope-grid">
-        <article class="scope-card do"><h3>初期リリースに含める</h3><ul class="scope-list"><li>1対1月額指導</li><li>グループ月額指導</li><li>毎月同額の自動更新</li><li>両方向の招待</li><li>期間終了時解約</li><li>支払い失敗の猶予</li><li>契約終了後アーカイブ</li><li>管理者による例外返金</li></ul></article>
-        <article class="scope-card later"><h3>初期リリースでは作らない</h3><ul class="scope-list"><li>単発決済</li><li>日割り計算</li><li>回数券・従量課金</li><li>追加オプション</li><li>クーポン・無料体験</li><li>年額・人数割引</li><li>プラン途中変更</li><li>複数人への売上分配</li></ul></article>
+        <article class="scope-card do"><h3>選手・保護者に伝えること</h3><ul class="scope-list"><li>動画を送るときのねらい</li><li>見てほしい場面</li><li>次の練習で意識すること</li><li>できるようになったこと</li><li>質問したいこと</li><li>次に動画を送る目安</li></ul></article>
+        <article class="scope-card later"><h3>指導者が意識すること</h3><ul class="scope-list"><li>まず良かった点を見つける</li><li>修正点は一度に一つに絞る</li><li>動画の時間を指定して伝える</li><li>書き込みで見える形にする</li><li>次に試す動きを短く伝える</li><li>変化を一緒に振り返る</li></ul></article>
       </div>
     </section>
 
     <section>
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Delivery Roadmap</p>
-          <h2>小さく始めて広げる</h2>
+          <p class="eyebrow">Your First Week</p>
+          <h2>まずは、いつもの指導から</h2>
         </div>
-        <p>料金モデルは変えず、スペースの構成と契約主体を段階的に増やします。</p>
+        <p>特別な準備は必要ありません。すでに行っている指導に、動画での振り返りを少しずつ加えてみましょう。</p>
       </div>
 
       <div class="roadmap">
-        <article class="phase"><span class="phase-no">01</span><h3>個人指導 MVP</h3><p>1対1スペース、月額契約、初回決済、更新、解約、支払い失敗を実装。最短で支払意欲を検証します。</p></article>
-        <article class="phase"><span class="phase-no">02</span><h3>教室・コミュニティ</h3><p>参加者ごとの契約、定員、共通領域と個人非公開領域を追加。既存顧客を持つアドバイザーへ展開します。</p></article>
-        <article class="phase"><span class="phase-no">03</span><h3>チーム・組織</h3><p>代表支払い、組織メンバー、複数アドバイザーを追加。法人・学校・スクール契約へ拡張します。</p></article>
+        <article class="phase"><span class="phase-no">01</span><h3>最初の動画を共有</h3><p>まずは一人の選手、または一つの練習動画から始めます。見てほしい場面を決めて送ってもらいましょう。</p></article>
+        <article class="phase"><span class="phase-no">02</span><h3>ひとつだけアドバイス</h3><p>動画を止めて書き込み、次に試してほしいことを一つだけ伝えます。短い言葉でも十分です。</p></article>
+        <article class="phase"><span class="phase-no">03</span><h3>次の動画で振り返る</h3><p>変化があった場面を一緒に確認します。小さな成長を言葉にすることが、継続する力になります。</p></article>
       </div>
     </section>
 
     <section>
       <div class="decision">
-        <h2>まずは「毎月同額・いつでも次回更新を停止できる」だけで始める。</h2>
-        <div class="decision-badge">RECOMMENDED<br>MVP</div>
+        <h2>動画を見て、必要なときに、すぐ言葉を届ける。<br>Share Hopperで、毎日の成長を支えよう。</h2>
+        <div class="decision-badge">SHARE<br>HOPPER</div>
       </div>
     </section>
   </main>
 
   <footer class="page">
-    <span>Pyuton Remote Advisor — Advisor Subscription Blueprint</span>
-    <span>Product concept / Subscription-first / July 2026</span>
+    <span>Share Hopper — 指導者向けガイド</span>
+    <span>&copy; 2026 Share Hopper. Powered by ぴゅとん工房</span>
   </footer>
 </body>
 </html>
