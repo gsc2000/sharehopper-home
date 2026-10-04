@@ -124,6 +124,30 @@
     .nav-links a { text-decoration: none; }
     .nav-links a:hover { color: var(--green); }
 
+    .audience-switch {
+      display: flex;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-2);
+    }
+
+    .audience-switch a {
+      padding: 6px 11px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .audience-switch a[aria-current="page"] {
+      color: white;
+      background: var(--green-dark);
+    }
+
     .hero {
       display: grid;
       grid-template-columns: minmax(0, 1.18fr) minmax(320px, 0.82fr);
@@ -942,6 +966,7 @@
       header { padding-bottom: 65px; }
       section { margin-bottom: 80px; }
       .nav-links { display: none; }
+      .audience-switch a { padding: 6px 9px; font-size: 0.66rem; }
       .hero { gap: 32px; }
       h1 { font-size: clamp(2.8rem, 15vw, 4.7rem); }
       .section-heading { gap: 18px; }
@@ -975,10 +1000,12 @@
           <img class="brand-mark" src="assets/logo.png" alt="">
           Share Hopper
         </a>
+        <nav class="audience-switch" aria-label="ページを切り替える">
+          <a href="index.html">個人向け</a>
+          <a href="advisor-subscription-visual-guide.html" aria-current="page">指導者向け</a>
+        </nav>
         <div class="nav-links">
-          <a href="index.html#top">ホーム</a>
           <a href="index.html#features">特長</a>
-          <a href="advisor-subscription-visual-guide.html" aria-current="page">指導者向け資料</a>
           <a href="https://apps.apple.com/jp/app/id6762832513" target="_blank" rel="noopener">App Store</a>
         </div>
       </nav>
